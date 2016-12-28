@@ -1,0 +1,5 @@
+git init
+git add.
+git commit -m"lavanya580"
+git push -u origin master
+git add remote origin

@@ -1,0 +1,159 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct dict
+{
+int k;
+int v;
+}a[10];
+
+int insert(int key,int value)
+{
+int h=0,i=0,j;
+h=key%10;
+if(a[h].k==-1)
+{
+a[h].k=key;
+a[h].v=value;
+return 1;
+}
+for(i=h+1;i<10;i++)
+{
+if(a[i].k==-1)
+{
+a[i].k=key;
+a[i].v=value;
+return 1;
+}
+}
+for(j=0;j<h;j++)
+{
+if(a[j].k==-1)
+{
+a[j].k=key;
+a[j].v=value;
+return 1;
+}
+}
+return -1;
+}
+
+
+int delete(int key)
+{
+int h=0,i=0,j=0;
+h=key%10;
+if(a[h].k==key)
+{
+a[h].k=-1;
+a[h].v=-1;
+return 1;
+}
+for(i=h+1;i<10;i++)
+{
+if(a[i].k==key)
+{
+a[i].k=-1;
+a[i].v=-1;
+return 1;
+}
+}
+for(j=0;j<h;j++)
+{
+if(a[j].k==key)
+{
+a[j].k=-1;
+a[j].v=-1;
+return 1;
+}
+}
+return -1;
+}
+
+int search(int key)
+{
+int h=0,i,j;
+h=key%10;
+if(a[h].k==key)
+{
+printf("Value found at the index : %d value is : %d\n",h,a[h].v);
+return 1;
+}
+for(i=h+1;i<10;i++)
+{
+if(a[i].k==key)
+{
+printf("Value found at the index : %d value is : %d\n",h,a[h].v);
+return 1;
+}
+}
+for(j=0;j<h;j++)
+{
+if(a[j].k==key)
+{
+printf("Key found at the index : %d value is : %d\n",h,a[h].v);
+return 1;
+}
+}
+return -1;
+}
+
+void display()
+{
+int i;
+printf("  Dictionary\n");
+printf("---------------\n");
+printf(" key  |  value \n");
+for(i=0;i<10;i++)
+{
+printf("%3d   | %5d\n",a[i].k,a[i].v);
+}
+}
+
+int main()
+{
+int c,i,key,value,check;
+for(i=0;i<10;i++)
+{
+a[i].k=-1;
+a[i].v=-1;
+}
+while(1)
+{
+printf("1.Insert\n2.Delete\n3.Search\n4.Display\n5.Exit\n”);
+printf("Enter your choice : ");
+scanf("%d",&c);
+switch(c)
+{
+case 1 : printf("Enter key :");
+scanf("%d",&key);
+printf("Enter value :");
+scanf("%d",&value);
+check=insert(key,value);
+if(check<0)
+{
+printf("Over Flow...\n");
+}
+break;
+case 2 : printf("Enter key :");
+scanf("%d",&key);
+check=delete(key);
+if(check<0)
+{
+printf("Key not Found...\n");
+}
+break;
+case 3 : printf("Enter key :");
+scanf("%d",&key);
+check=search(key);
+if(check<0)
+{
+printf("Key not found...");
+}
+break;
+case 4 : display();
+break;
+case 5 : return 0;
+default : printf("Inavalid option choosen...\n Choose a valid option");
+}
+}
+}
